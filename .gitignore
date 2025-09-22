@@ -43,6 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Remember to never publicly share your keystore.
+/environment/key.properties
+/environment/upload-keystore.jks
 
 # Flutter gen-l10n outputs
 lib/l10n/app_localizations.dart
