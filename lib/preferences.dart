@@ -91,7 +91,7 @@ class Preferences {
         'low' => bg.Config.DESIRED_ACCURACY_LOW,
         _ => bg.Config.DESIRED_ACCURACY_MEDIUM,
       },
-      autoSync: false,
+      autoSync: true,
       url: _formatUrl(instance.getString(url)),
       params: {
         'device_id': instance.getString(id),
@@ -116,9 +116,12 @@ class Preferences {
       ),
       notification: bg.Notification(
         smallIcon: 'drawable/ic_stat_notify',
-        priority: bg.Config.NOTIFICATION_PRIORITY_LOW,
+        priority: bg.Config.NOTIFICATION_PRIORITY_HIGH,
+        title: "Tracking Active",
+        text: "Location tracking in progress",
+        color: "#00FF00",
       ),
-      showsBackgroundLocationIndicator: false,
+      showsBackgroundLocationIndicator: true,
     );
   }
 
