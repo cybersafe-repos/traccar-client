@@ -63,13 +63,16 @@ class Preferences {
       await _migrate();
     }
     await instance.setString(id, instance.getString(id) ?? (Random().nextInt(90000000) + 10000000).toString());
-    await instance.setString(url, instance.getString(url) ?? 'http://demo.traccar.org:5055');
-    await instance.setString(accuracy, instance.getString(accuracy) ?? 'medium');
-    await instance.setInt(interval, instance.getInt(interval) ?? 300);
-    await instance.setInt(distance, instance.getInt(distance) ?? 75);
+    await instance.setString(url, instance.getString(url) ?? 'http://88.222.213.175:8082');
+    await instance.setString(accuracy, instance.getString(accuracy) ?? 'highest');
+    await instance.setInt(interval, instance.getInt(interval) ?? 10);
+    await instance.setInt(distance, instance.getInt(distance) ?? 10);
     await instance.setBool(buffer, instance.getBool(buffer) ?? true);
     await instance.setBool(stopDetection, instance.getBool(stopDetection) ?? true);
-    await instance.setInt(fastestInterval, instance.getInt(fastestInterval) ?? 30);
+    await instance.setInt(fastestInterval, instance.getInt(fastestInterval) ?? 10);
+    await instance.setInt(angle, instance.getInt(angle) ?? 15);
+    await instance.setInt(heartbeat, instance.getInt(heartbeat) ?? 180);
+    await instance.setBool(wakelock, instance.getBool(wakelock) ?? true);
   }
 
   static bg.Config geolocationConfig() {
@@ -88,7 +91,7 @@ class Preferences {
         'low' => bg.Config.DESIRED_ACCURACY_LOW,
         _ => bg.Config.DESIRED_ACCURACY_MEDIUM,
       },
-      autoSync: false,
+      autoSync: true,
       url: _formatUrl(instance.getString(url)),
       params: {
         'device_id': instance.getString(id),
@@ -113,9 +116,12 @@ class Preferences {
       ),
       notification: bg.Notification(
         smallIcon: 'drawable/ic_stat_notify',
-        priority: bg.Config.NOTIFICATION_PRIORITY_LOW,
+        priority: bg.Config.NOTIFICATION_PRIORITY_HIGH,
+        title: "Tracking Active",
+        text: "Location tracking in progress",
+        color: "#00FF00",
       ),
-      showsBackgroundLocationIndicator: false,
+      showsBackgroundLocationIndicator: true,
     );
   }
 
